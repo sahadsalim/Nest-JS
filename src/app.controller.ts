@@ -9,8 +9,8 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-  @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.appService.findOne(id);
-  }
+  // @Get(':id')
+  // async findOne(@Param('id', ParseIntPipe) id: number) {
+  //   return this.appService.findOne(id);
+  // }
 }
