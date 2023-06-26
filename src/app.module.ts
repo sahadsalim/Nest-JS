@@ -4,9 +4,17 @@ import { AppService } from './app.service';
 import { SampleModule } from './sample/sample.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PlayerModule } from './player/player.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
-  imports: [SampleModule,MongooseModule.forRoot('mongodb+srv://sahads9745:Test%40123@cluster0.cuxiqsz.mongodb.net/test'), PlayerModule],
+  imports: [SampleModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.MONGODB_DB_URI),
+    PlayerModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { 
+}

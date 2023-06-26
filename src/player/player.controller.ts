@@ -42,13 +42,11 @@ export class PlayerController {
   async findAll(@Res() response) {
     try {
       const InfoData = await this.playerService.findAll();
-      console.log(InfoData)
       return response.status(HttpStatus.OK).json({
         message: 'All Info  data fetched successfully',
         InfoData
       });
     } catch (err) {
-      console.log(err)
       return response.status(err.status).json(err.response);
     }
   }
