@@ -4,6 +4,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IEvent } from './interface/event.interface';
+import { log } from 'console';
 
 @Injectable()
 export class EventService {
@@ -38,7 +39,11 @@ export class EventService {
     return existingInfo ? true : false;
   }
   async update(InfoId: string, updateInfoDto: UpdateEventDto): Promise<IEvent> {
+    console.log(updateInfoDto);
+    
     const existingInfo = await this.EventModel.findByIdAndUpdate(InfoId, updateInfoDto, { new: true });
+    console.log(existingInfo);
+    
     if (!existingInfo) {
       throw new NotFoundException(`Event #${InfoId} not found`);
     }

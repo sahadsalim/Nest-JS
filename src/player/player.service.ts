@@ -24,6 +24,8 @@ export class PlayerService {
   }
 
   async findOne(InfoId: string): Promise<IPlayer> {
+    console.log("InfoId",InfoId);
+    
     const existingInfo = await this.PlayerModel.findById(InfoId).exec();
     if (!existingInfo) {
       throw new NotFoundException(`Player #${InfoId} not found`);

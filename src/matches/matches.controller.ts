@@ -9,26 +9,26 @@ export class MatchesController {
 
   @Post()
   create(@Body() createMatchDto: CreateMatchDto) {
-    return this.matchesService.create(createMatchDto);
+    return this.matchesService.createMatch(createMatchDto);
   }
 
   @Get()
   findAll() {
-    return this.matchesService.findAll();
+    return this.matchesService.getAllMatchs();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.matchesService.findOne(+id);
+    return this.matchesService.getMatch(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateMatchDto: UpdateMatchDto) {
-    return this.matchesService.update(+id, updateMatchDto);
+    return this.matchesService.updateMatch(id, updateMatchDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.matchesService.remove(+id);
+    return this.matchesService.deleteMatch(id);
   }
 }

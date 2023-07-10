@@ -1,4 +1,6 @@
-import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, isDateString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested, isDateString } from "class-validator";
+import { EventPlayerDto } from "./event-player.dto";
 
 export class CreateEventDto {
     @IsString()
@@ -22,4 +24,9 @@ export class CreateEventDto {
     @IsString()
     @IsOptional()
     readonly place: string;
+
+    @IsOptional()
+    @ValidateNested({ each: true })
+	@Type(() => EventPlayerDto)
+	players: EventPlayerDto[];
 }

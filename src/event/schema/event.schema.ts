@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { CreatePlayerDto } from 'src/player/dto/create-player.dto';
+import { EventPlayerDto } from '../dto/event-player.dto';
 
 export type EventDocument = HydratedDocument<Event>;
 
@@ -17,6 +19,9 @@ export class Event {
   date: Date;
   @Prop()
   place: string;
+
+  @Prop()
+  players:EventPlayerDto[];
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

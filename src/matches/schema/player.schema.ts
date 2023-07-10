@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { CreatePlayerDto } from 'src/player/dto/create-player.dto';
 
-export type PlayerDocument = HydratedDocument<Player>;
+export type MatchDocument = HydratedDocument<Match>;
 
 @Schema()
-export class Player {
+export class Match {
   @Prop({ required: true})
   name: string;
 
@@ -13,6 +14,8 @@ export class Player {
 
   @Prop()
   image: string;
+
+
 }
 
-export const PlayerSchema = SchemaFactory.createForClass(Player);
+export const MatchSchema = SchemaFactory.createForClass(Match);
