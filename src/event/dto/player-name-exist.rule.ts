@@ -11,6 +11,8 @@ export class PlayerNameExists implements ValidatorConstraintInterface {
     validate(name: string) {
         console.log(name);
         try{
+            console.log(this.players);
+            
         let x=this.players.findOneByName(name).then((player) => {
             return player !== undefined;
         });

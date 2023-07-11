@@ -1,3 +1,4 @@
+import { Event } from "src/event/entities/event.entity";
 
 export interface IPlayer extends Document {
 
@@ -5,4 +6,5 @@ export interface IPlayer extends Document {
 
     readonly id: number;
     readonly image: string;
+    // readonly events:Event;
 }

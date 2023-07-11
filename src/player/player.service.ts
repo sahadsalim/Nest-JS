@@ -5,17 +5,18 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Player } from './entities/player.entity';
 import { Model } from 'mongoose';
 import { IPlayer } from './interface/player.interface';
+import { PlayerDocument } from './schema/player.schema';
 
 @Injectable()
 export class PlayerService {
 
-  constructor(@InjectModel(Player.name) private PlayerModel: Model<IPlayer>) { }
+  constructor(@InjectModel(Player.name) private PlayerModel: Model<PlayerDocument>) { }
 
-  async create(createPlayerDto: CreatePlayerDto): Promise<IPlayer> {
+  async create(createPlayerDto: CreatePlayerDto): Promise<PlayerDocument> {
     const newPlayer = await new this.PlayerModel(createPlayerDto);
     return newPlayer.save();
   }
-  async findAll(): Promise<IPlayer[]> {
+  async findAll(): Promise<PlayerDocument[]> {
     const InfoData = await this.PlayerModel.find();
     if (!InfoData || InfoData.length == 0) {
       throw new NotFoundException('Player data not found!');
@@ -23,7 +24,7 @@ export class PlayerService {
     return InfoData;
   }
 
-  async findOne(InfoId: string): Promise<IPlayer> {
+  async findOne(InfoId: string): Promise<PlayerDocument> {
     console.log("InfoId",InfoId);
     
     const existingInfo = await this.PlayerModel.findById(InfoId).exec();
@@ -34,13 +35,15 @@ export class PlayerService {
   }
 
   async findOneByName(nameValue: string) {
+    console.log(nameValue);
+    
     const existingInfo = await this.PlayerModel.exists({ name: nameValue });
     if (existingInfo) {
       throw new NotAcceptableException(`Player already exist`);
     }
     return existingInfo ? true : false;
   }
-  async update(InfoId: string, updateInfoDto: UpdatePlayerDto): Promise<IPlayer> {
+  async update(InfoId: string, updateInfoDto: UpdatePlayerDto): Promise<PlayerDocument> {
     const existingInfo = await this.PlayerModel.findByIdAndUpdate(InfoId, updateInfoDto, { new: true });
     if (!existingInfo) {
       throw new NotFoundException(`Player #${InfoId} not found`);
@@ -48,7 +51,7 @@ export class PlayerService {
     return existingInfo;
   }
 
-  async remove(InfoId: string): Promise<IPlayer> {
+  async remove(InfoId: string): Promise<PlayerDocument> {
     const deletedInfo = await this.PlayerModel.findByIdAndDelete(InfoId);
     if (!deletedInfo) {
       throw new NotFoundException(`Info #${InfoId} not found`);
