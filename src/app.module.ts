@@ -7,6 +7,8 @@ import { PlayerModule } from './player/player.module';
 import { ConfigModule } from '@nestjs/config';
 import { MatchesModule } from './matches/matches.module';
 import { EventModule } from './event/event.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [SampleModule,
     ConfigModule.forRoot({
@@ -16,7 +18,9 @@ import { EventModule } from './event/event.module';
     MongooseModule.forRoot(process.env.MONGODB_DB_URI),
     PlayerModule,
     MatchesModule,
-    EventModule],
+    EventModule,
+    UserModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
