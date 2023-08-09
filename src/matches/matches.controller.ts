@@ -2,21 +2,20 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res } fr
 import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
-import { response } from 'express';
 
 @Controller('matches')
 export class MatchesController {
   constructor(private readonly matchesService: MatchesService) { }
 
   @Post()
-  create(@Body() createMatchDto: CreateMatchDto,@Res() response) {
-    try{
+  create(@Body() createMatchDto: CreateMatchDto, @Res() response) {
+    try {
       const newEvent = this.matchesService.createMatch(createMatchDto);
       return response.status(HttpStatus.CREATED).json({
         message: 'Match has been created successfully',
         newEvent,
       });
-    }catch(err){
+    } catch (err) {
       return response.status(HttpStatus.BAD_REQUEST).json({
         statusCode: 406,
         message: `Error:${err.response.message}`,

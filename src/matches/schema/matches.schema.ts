@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { TeamScore } from '../interface/match.interface';
-import { Player } from 'src/player/entities/player.entity';
 
 export type MatchDocument = HydratedDocument<Match>;
 

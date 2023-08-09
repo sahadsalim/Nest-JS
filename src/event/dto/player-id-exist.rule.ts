@@ -8,16 +8,13 @@ import { PlayerService } from 'src/player/player.service';
 export class PlayerIdExists implements ValidatorConstraintInterface {
     constructor(private readonly players: PlayerService) { }
 
-    validate(id: string) {
-        console.log(id);
-        try{
-        let x=this.players.findOne(id).then((player) => {
-            return player !== undefined;
-        });
-        console.log("x",x);
-        
-        return x;
-        }catch(error){
+    async validate(id: string) {
+        try {
+            let x = await this.players.findOne(id).then((player) => {
+                return player !== undefined;
+            });
+            return x;
+        } catch (error) {
             console.log(error);
         }
     }

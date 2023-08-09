@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus } from '@nestjs/common';
 import { PlayerService } from './player.service';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
@@ -12,14 +12,14 @@ export class PlayerController {
     try {
       const check = await this.playerService.findOneByName(createPlayerDto.name);
       if (!check) {
-        const newInfo = this.playerService.create(createPlayerDto);
+        const newPlayer = this.playerService.create(createPlayerDto);
         return response.status(HttpStatus.CREATED).json({
           message: 'Player has been created successfully',
-          newInfo,
+          newPlayer,
         });
       }
     } catch (err) {
-      if (err.status== 406) {
+      if (err.status == 406) {
         return response.status(HttpStatus.BAD_REQUEST).json({
           statusCode: 406,
           message: `Error:${err.response.message}`,
@@ -41,22 +41,22 @@ export class PlayerController {
   @Get()
   async findAll(@Res() response) {
     try {
-      const InfoData = await this.playerService.findAll();
+      const PlayerData = await this.playerService.findAll();
       return response.status(HttpStatus.OK).json({
-        message: 'All Info  data fetched successfully',
-        InfoData
+        message: 'All Player  data fetched successfully',
+        PlayerData
       });
     } catch (err) {
       return response.status(err.status).json(err.response);
     }
   }
   @Get(':id')
-  async findOne(@Res() response, @Param('id') InfoId: string) {
+  async findOne(@Res() response, @Param('id') PlayerId: string) {
     try {
-      const existingInfo = await this.playerService.findOne(InfoId);
+      const existingPlayer = await this.playerService.findOne(PlayerId);
       return response.status(HttpStatus.OK).json({
-        message: 'Info found successfully',
-        existingInfo,
+        message: 'Player found successfully',
+        existingPlayer,
       });
     } catch (err) {
       return response.status(err.status).json(err.response);
@@ -65,22 +65,22 @@ export class PlayerController {
   @Patch(':id')
   update(@Res() response, @Param('id') id: string, @Body() updatePlayerDto: UpdatePlayerDto) {
     try {
-      const existingInfo = this.playerService.update(id, updatePlayerDto);
+      const existingPlayer = this.playerService.update(id, updatePlayerDto);
       return response.status(HttpStatus.OK).json({
-        message: 'Info has been successfully updated',
-        existingInfo,
+        message: 'Player has been successfully updated',
+        existingPlayer,
       });
     } catch (err) {
       return response.status(err.status).json(err.response);
     }
   }
   @Delete(':id')
-  async remove(@Res() response, @Param('id') InfoId: string) {
+  async remove(@Res() response, @Param('id') PlayerId: string) {
     try {
-      const deletedInfo = await this.playerService.remove(InfoId);
+      const deletedPlayer = await this.playerService.remove(PlayerId);
       return response.status(HttpStatus.OK).json({
-        message: 'Info deleted successfully',
-        deletedInfo,
+        message: 'Player deleted successfully',
+        deletedPlayer,
       });
     } catch (err) {
       return response.status(err.status).json(err.response);

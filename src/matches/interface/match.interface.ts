@@ -1,9 +1,9 @@
 
 import { Player } from "src/player/entities/player.entity";
-export interface TeamScore{
-    player1:Player,
-    player2:Player
-    score:number;
+export interface TeamScore {
+    player1: Player,
+    player2: Player
+    score: number;
 
 }
 export interface IMatch extends Document {
@@ -13,9 +13,9 @@ export interface IMatch extends Document {
     readonly id: number;
     readonly image: string;
     readonly eventId: string;
-    readonly isDoubles:boolean;
+    readonly isDoubles: boolean;
 
-    readonly team1:TeamScore;
-    readonly team2:TeamScore;
+    readonly team1: TeamScore;
+    readonly team2: TeamScore;
 
 }

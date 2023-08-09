@@ -6,5 +6,4 @@ export interface IPlayer extends Document {
 
     readonly id: number;
     readonly image: string;
-    // readonly events:Event;
 }

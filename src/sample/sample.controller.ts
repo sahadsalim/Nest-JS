@@ -5,7 +5,7 @@ import { UpdateSampleDto } from './dto/update-sample.dto';
 
 @Controller('sample')
 export class SampleController {
-  constructor(private readonly sampleService: SampleService) {}
+  constructor(private readonly sampleService: SampleService) { }
 
   @Post()
   create(@Body() createSampleDto: CreateSampleDto) {

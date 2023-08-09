@@ -12,18 +12,18 @@ export class AuthController {
     private authService: AuthService,
 
   ) { }
+
   @Get("/onlyauth")
   @UseGuards(AuthGuard("jwt"))
-
   async hiddenInformation() {
     return "hidden information";
   }
 
   @Get("/anyone")
-
   async publicInformation() {
     return "this can be seen by anyone";
   }
+
   @Post('register')
   async register(@Body() RegisterDTO: RegisterDTO) {
     const user = await this.userService.create(RegisterDTO);
@@ -31,11 +31,10 @@ export class AuthController {
 
       email: user.email,
     };
-    console.log(payload);
-
     const token = await this.authService.signPayload(payload);
     return { user, token };
   }
+
   @Post('login')
   async login(@Body() UserDTO: LoginDTO) {
     const user = await this.userService.findByLogin(UserDTO);

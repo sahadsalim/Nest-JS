@@ -9,9 +9,7 @@ export class EventController {
 
   @Post()
   async create(@Res() response, @Body() createEventDto: CreateEventDto) {
-    console.log(createEventDto)
-    Object.assign(createEventDto,{"date" : new Date(createEventDto.date)});
-
+    Object.assign(createEventDto, { "date": new Date(createEventDto.date) });
     try {
       const check = await this.eventService.findOneByName(createEventDto.name);
       if (!check) {
@@ -22,7 +20,7 @@ export class EventController {
         });
       }
     } catch (err) {
-      if (err.status== 406) {
+      if (err.status == 406) {
         return response.status(HttpStatus.BAD_REQUEST).json({
           statusCode: 406,
           message: `Error:${err.response.message}`,
@@ -36,8 +34,6 @@ export class EventController {
           error: 'Bad Request'
         });
       }
-
-
     }
   }
 

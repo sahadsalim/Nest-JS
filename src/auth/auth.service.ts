@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
-// import { Payload } from 'src/types/payload';
 import { sign } from 'jsonwebtoken';
 export interface Payload {
     email: string
 }
 @Injectable()
 export class AuthService {
+
     constructor(private userService: UserService) { }
 
     async signPayload(payload: Payload) {
@@ -14,5 +14,5 @@ export class AuthService {
     }
     async validateUser(payload: Payload) {
         return await this.userService.findByPayload(payload);
-      }
+    }
 }

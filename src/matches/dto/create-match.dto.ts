@@ -14,7 +14,6 @@ export class CreateMatchDto {
 
     @IsString()
     @IsOptional()
-    // @IsNotEmpty()
     readonly image: string;
 
     @IsString()

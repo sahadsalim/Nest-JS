@@ -1,6 +1,4 @@
-import { Type } from "class-transformer";
-import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, ValidateNested, isDateString } from "class-validator";
-import { Player } from "src/player/schema/player.schema";
+import { IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from "class-validator";
 
 export class CreateEventDto {
     @IsString()
@@ -14,10 +12,8 @@ export class CreateEventDto {
 
     @IsString()
     @IsOptional()
-    // @IsNotEmpty()
     readonly image: string;
 
-    // @IsDate()
     @IsOptional()
     readonly date: Date;
 
@@ -26,7 +22,5 @@ export class CreateEventDto {
     readonly place: string;
 
     @IsOptional()
-    // @ValidateNested({ each: true })
-	// @Type(() => Player)
-	readonly players: any[];
+    readonly players: any[];
 }

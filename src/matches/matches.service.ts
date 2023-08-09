@@ -11,17 +11,15 @@ export class MatchesService {
     constructor(@InjectModel(Match.name) private MatchModel: Model<IMatch>) { }
 
     async createMatch(createMatchDto: CreateMatchDto): Promise<IMatch> {
-        console.log(Model<IMatch>);
-        if(createMatchDto.isDoubles){
+        if (createMatchDto.isDoubles) {
             if (createMatchDto.team1.player1 && createMatchDto.team1.player2 && createMatchDto.team2.player1 && createMatchDto.team2.player2) {
                 return await this.saveData(createMatchDto);
-            }else{
+            } else {
                 throw new BadRequestException('Bad Request', { cause: new Error(), description: 'You must enter the information for two players from both teams.' })
             }
         }
-
     }
-    async saveData(createMatchDto){
+    async saveData(createMatchDto) {
         const newMatch = await new this.MatchModel(createMatchDto);
         return newMatch.save();
     }
@@ -32,12 +30,6 @@ export class MatchesService {
         }
         return existingMatch;
     }
-    // async findAll(skip: number = 0, limit?: number, page?: number, keys?: { names?: string[] }) {
-
-    //     let paginate = await this.utils.generatePaginationDate<IMatch>(this.MatchModel, 'Match', limit, skip, page, keys);
-
-    //     return { ...paginate };
-    // }
     async getAllMatchs(): Promise<IMatch[]> {
         const MatchData = await this.MatchModel.find();
         if (!MatchData || MatchData.length == 0) {

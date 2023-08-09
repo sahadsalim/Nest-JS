@@ -16,11 +16,11 @@ export class SampleService {
   }
 
   async findAll() {
-    const InfoData = await this.SampleModel.find();
-    if (!InfoData || InfoData.length == 0) {
-        throw new NotFoundException('Samples data not found!');
+    const SampleData = await this.SampleModel.find();
+    if (!SampleData || SampleData.length == 0) {
+      throw new NotFoundException('Samples data not found!');
     }
-    return InfoData;
+    return SampleData;
   }
 
   findOne(id: number) {
